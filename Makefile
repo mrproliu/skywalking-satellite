@@ -37,7 +37,7 @@ GO_PATH = $$($(GO) env GOPATH)
 GO_BUILD = $(GO) build
 GO_GET = $(GO) get
 GO_TEST = $(GO) test
-GO_LINT = $(GO_PATH)/bin/golangci-lint
+GO_LINT = golangci-lint
 GO_BUILD_FLAGS = -v
 GO_BUILD_LDFLAGS = -X main.version=$(VERSION) -X google.golang.org/protobuf/reflect/protoregistry.conflictPolicy=ignore -w -s
 GO_TEST_LDFLAGS = -X google.golang.org/protobuf/reflect/protoregistry.conflictPolicy=warn
@@ -53,7 +53,7 @@ all: deps verify build gen-docs check
 
 .PHONY: tools
 tools:
-	$(GO_LINT) version || curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(GO_PATH)/bin v1.48.0
+	$(GO_LINT) version || curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(GO_PATH)/bin v1.59.1
 
 deps: tools
 	$(GO_GET) -v -t -d ./...
